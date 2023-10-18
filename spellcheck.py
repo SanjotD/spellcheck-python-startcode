@@ -5,7 +5,7 @@
 
 import re  # Needed for splitting text with a regular expression
 import math
-
+import time
 
 def main():
     # Load data files into lists
@@ -46,7 +46,7 @@ def loadWordsFromFile(fileName):
 # end loadWordsFromFile()
 
 
-# Linear and Binary Search Functions
+# Search Functions
     # Linear
 def linearSearch(anArray, item):
     for i in range(len(anArray)):
@@ -81,37 +81,61 @@ def menuSelect():
 
     # Spell Check (Linear)
 def checkLin(dictionary):
+    startTime = time.time()
+
     userWord = input("\nPlease enter a word: ")
     print("Linear Search Starting...")
     userWord = userWord.lower()
     if (linearSearch(dictionary, userWord)) != -1:
         print(f"\n{userWord} is IN the dictionary at position {linearSearch(dictionary, userWord)}.")
+        endTime = time.time()
+        print(f"({endTime - startTime} seconds)")
     else:
         print(f"\n{userWord} is NOT IN the dictionary. ")
     # Spell Check (Binary)
 def checkBin(dictionary):
+    startTime = time.time()
+    
     userWord = input("\nPlease enter a word: ")
     print("Binary Search Starting...")
     userWord = userWord.lower()
     if (binarySearch(dictionary, userWord)) != -1:
         print(f"\n{userWord} is IN the dictionary at position {binarySearch(dictionary, userWord)}.")
+        endTime = time.time()
+        print(f"({endTime - startTime} seconds)")
+
     else:
         print(f"\n{userWord} is NOT IN the dictionary. ")
     # Alice in Wonderland (Linear)
 def aliceLin(dictionary, aliceWords):
     # loop, count for each -1
-    print("Spell Check Alice in Wonderland (Linear)")
+    print("\nLinear Search Starting...")
+    startTime = time.time()
     notFoundCount = 0
+
     for i in range(len(aliceWords)):
+        aliceWords[i] = (aliceWords[i].lower())
         if (linearSearch(dictionary, aliceWords[i])) == -1:
             notFoundCount = notFoundCount + 1
-    print(f"Search: {notFoundCount} ")
-            
-"""    else:
-        print(f"is NOT IN the dictionary. ")"""
+
+    print(f"Number of words not found in the dictionary: {notFoundCount} ")
+    endTime = time.time()
+    print(f"({endTime - startTime} seconds)")
+
     # Alice in Wonderland (Binary)
 def aliceBin(dictionary, aliceWords):
-    print("Spell Check Alice in Wonderland (Binary)")
+    print("Binary Search Starting...")
+    startTime = time.time()
+    notFoundCount = 0
+
+    for i in range(len(aliceWords)):
+        aliceWords[i] = (aliceWords[i].lower())
+        if (binarySearch(dictionary, aliceWords[i])) == -1:
+            notFoundCount = notFoundCount + 1
+
+    print(f"Number of words not found in dictionary: {notFoundCount} ")
+    endTime = time.time()
+    print(f"({endTime - startTime} seconds)")
 
 
 # Call main() to begin program
